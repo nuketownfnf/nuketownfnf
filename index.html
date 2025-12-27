@@ -60,7 +60,7 @@
         }
         .nav-links {
             display: flex;
-            gap: 2.5rem;
+            gap: 1.5rem;
         }
         .nav-links a {
             text-decoration: none;
@@ -107,6 +107,97 @@
             border-radius: 12px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.3);
             margin-bottom: 2rem;
+        }
+        .recent-posts h2 {
+            margin-bottom: 2rem;
+            color: var(--accent-color);
+            text-shadow: 0 0 10px var(--accent-color);
+            text-align: center;
+        }
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        .post-card {
+            background: rgba(0,0,0,0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255,51,51,0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .post-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255,51,51,0.3);
+            border-color: var(--accent-color);
+        }
+        .post-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-color), #ff6666);
+        }
+        .post-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #b0b0b0;
+        }
+        .post-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--accent-color);
+        }
+        .post-content {
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+        .post-images {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .post-images img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+        .post-card:hover .post-images img {
+            transform: scale(1.02);
+        }
+        .post-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            background: rgba(255,51,51,0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,51,51,0.4);
+        }
+        .post-link:hover {
+            background: var(--accent-color);
+            transform: translateX(5px);
+        }
+        .no-images {
+            text-align: center;
+            color: #888;
+            font-style: italic;
+            padding: 2rem;
         }
         .ticker-section {
             text-align: center;
@@ -159,6 +250,21 @@
             padding: 2rem;
             margin-top: 3rem;
         }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .posts-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            .nav-links {
+                gap: 1rem;
+            }
+            .nav-links a {
+                font-size: 1rem;
+                padding: 0.5rem 1rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -168,6 +274,8 @@
             <div class="nav-links">
                 <a href="#home">Home</a>
                 <a href="#about">About</a>
+                <a href="#recent">Recent Posts</a>
+                <a href="#ticker">SOL Price</a>
                 <a href="#chart">Live Chart</a>
                 <a href="#social">Socials</a>
                 <a href="#contact">Contact</a>
@@ -177,22 +285,76 @@
     <main>
         <section class="hero" id="home">
             <h1> ☢️ Welcome to NuketownFNF ☢️</h1>
-            <p>A family of traders sharing trading ideas all across the world. 24/7.  Powered by @_shadowsols & @bonkbot_io.</p>
+            <p>A family of traders sharing trading ideas all across the world. 24/7. Powered by @_shadowsols & @bonkbot_io.</p>
         </section>
-        <section class="ticker-section" id="ticker">
-            <h2>Live Price: Solana (SOL) 📈</h2>
-            <script src="https://widgets.coingecko.com/coingecko-coin-price-marquee-widget.js"></script>
-            <coingecko-coin-price-marquee-widget coin-ids="solana" currency="usd" background-color="var(--card-bg)" locale="en"></coingecko-coin-price-marquee-widget>
-        </section>
+
         <section class="section" id="about">
             <h2>About NuketownFNF</h2>
             <p>☢️ We drop calls, share alpha, and analysis across all types of charts from cryptos/futures/stocks/CFDs/etc. A true powerhouse that succeeds by working together.</p>
             <p>Owner: @_shadowsols | Powered by @bonkbot_io</p>
         </section>
+
+        <section class="section recent-posts" id="recent">
+            <h2>Recent Posts from @_shadowsols ☢️</h2>
+            <div class="posts-grid">
+                <!-- Post 1: Bidding BTC/SOL -->
+                <div class="post-card" onclick="window.open('https://x.com/_shadowsols/status/2004814334812451026', '_blank')">
+                    <div class="post-meta">
+                        <img src="https://pbs.twimg.com/profile_images/1977242204990214144/WMgDBCYc.jpg" alt="@_shadowsols" class="post-avatar">
+                        <div>
+                            <strong>@_shadowsols</strong><br>
+                            <small>Latest</small>
+                        </div>
+                    </div>
+                    <div class="post-content">everyone is focused on precious metals while $btc and $sol sit at key bidding levels.<br><br>bidding quietly.</div>
+                    <div class="no-images">No images in this post</div>
+                    <a href="https://x.com/_shadowsols/status/2004814334812451026" target="_blank" class="post-link">View on X →</a>
+                </div>
+
+                <!-- Post 2: SOL bidding call + chart -->
+                <div class="post-card" onclick="window.open('https://x.com/_shadowsols/status/2004811734981505474', '_blank')">
+                    <div class="post-meta">
+                        <img src="https://pbs.twimg.com/profile_images/1977242204990214144/WMgDBCYc.jpg" alt="@_shadowsols" class="post-avatar">
+                        <div>
+                            <strong>@_shadowsols</strong><br>
+                            <small>Latest</small>
+                        </div>
+                    </div>
+                    <div class="post-content">idk about you but im bidding $sol here pretty heavily.<br><br>this area is key level for me at which i would systematically enter.<br><br>fundamentals behind the trade and vision remain the same plus the chart looks good to me.<br><br>set tight stops in place and you should be fine but i will be giving this position some room to breathe.</div>
+                    <div class="post-images">
+                        <img src="https://pbs.twimg.com/media/G9KFBKeaAAA0wsp.jpg" alt="SOL Chart">
+                    </div>
+                    <a href="https://x.com/_shadowsols/status/2004811734981505474" target="_blank" class="post-link">View Full Thread on X →</a>
+                </div>
+
+                <!-- Post 3: Holders mentality -->
+                <div class="post-card" onclick="window.open('https://x.com/_shadowsols/status/2004799917945225386', '_blank')">
+                    <div class="post-meta">
+                        <img src="https://pbs.twimg.com/profile_images/1977242204990214144/WMgDBCYc.jpg" alt="@_shadowsols" class="post-avatar">
+                        <div>
+                            <strong>@_shadowsols</strong><br>
+                            <small>Latest</small>
+                        </div>
+                    </div>
+                    <div class="post-content">the chart only goes down cause the holders have a poor mentality and sell for peanuts.<br><br>if you can't hold the dip, you don't deserve the rip</div>
+                    <div class="no-images">No images in this post</div>
+                    <a href="https://x.com/_shadowsols/status/2004799917945225386" target="_blank" class="post-link">View on X →</a>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 2rem; font-style: italic; color: #888;">
+                👆 Click any post card to open on X! Showing the 3 most recent original posts from @_shadowsols (as of December 27, 2025).
+            </p>
+        </section>
+
+        <section class="ticker-section" id="ticker">
+            <h2>Live Price: Solana (SOL) 📈</h2>
+            <script src="https://widgets.coingecko.com/coingecko-coin-price-marquee-widget.js"></script>
+            <coingecko-coin-price-marquee-widget coin-ids="solana" currency="usd" background-color="var(--card-bg)" locale="en"></coingecko-coin-price-marquee-widget>
+        </section>
+
         <section class="section chart-section" id="chart">
             <h2>Live Trading Chart: Solana ☢️📊</h2>
             <p>Interact with the chart: zoom, draw, add indicators, change timeframes!</p>
-            <!-- TradingView Widget BEGIN -->
             <div class="tradingview-widget-container">
                 <div id="tradingview_chart"></div>
                 <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
@@ -215,8 +377,8 @@
                 );
                 </script>
             </div>
-            <!-- TradingView Widget END -->
         </section>
+
         <section class="section social-links" id="social">
             <h2>Connect With Us ☢️</h2>
             <div class="social-buttons">
@@ -231,6 +393,7 @@
                 </a>
             </div>
         </section>
+
         <section class="section" id="contact">
             <h2>Welcome to NUKETOWN FNF, where traders become family.</h2>
             <p>Hit the links above to follow, join, and stay locked in or you're NGMI!</p>
@@ -261,9 +424,16 @@
                 colors: ['#ff3333', '#ff4444', '#ffffff', '#00ff00']
             });
         });
+        // Make entire post cards clickable (fallback)
+        document.querySelectorAll('.post-card').forEach(card => {
+            card.style.cursor = 'pointer';
+            card.addEventListener('click', function(e) {
+                if (e.target.tagName !== 'A' && !e.target.closest('a')) {
+                    const url = this.querySelector('.post-link').href;
+                    window.open(url, '_blank');
+                }
+            });
+        });
     </script>
 </body>
-
 </html>
-
-
